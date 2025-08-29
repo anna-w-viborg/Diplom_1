@@ -6,16 +6,19 @@ from conftest_delete import ingredient
 
 class TestBurger:
 
-    def test_set_buns(self, bun, burger):
+    def test_set_buns(self, bun):
+        burger = Burger()
         burger.set_buns(bun)
         assert burger.bun == bun
 
-    def test_add_ingredient(self, ingredient, burger):
+    def test_add_ingredient(self, ingredient):
+        burger = Burger()
         burger.add_ingredient(ingredient)
         assert len(burger.ingredients) == 1
         assert burger.add_ingredients[0] == ingredient
 
-    def test_remove_ingredient(self, ingredient, burger):
+    def test_remove_ingredient(self, ingredient):
+        burger = Burger()
         burger.add_ingredient(ingredient)
         burger.add_ingredient(ingredient)
         assert len(burger.ingredients) == 2
@@ -24,7 +27,8 @@ class TestBurger:
         burger.remove_ingredient(0)
         assert burger.ingredients == []
 
-    def test_move_ingredient(self, burger):
+    def test_move_ingredient(self):
+        burger = Burger()
         ingredient_1 = Mock()
         ingredient_2 = Mock()
         ingredient_1.get_name.return_value = "Beef"
@@ -39,7 +43,8 @@ class TestBurger:
 
 
 
-    def test_get_price(self, burger, bun):
+    def test_get_price(self, bun):
+        burger = Burger()
         burger.set_buns(bun)
         beef = Ingredient("FILLING", "Space Beef", 50.0)
         sauce = Ingredient("SAUCE", "Space sause", 25.0)
@@ -48,7 +53,8 @@ class TestBurger:
         assert burger.get_price() == 175.0
 
 
-    def test_get_receipt(self, burger, bun, ingredient):
+    def test_get_receipt(self, bun, ingredient):
+        burger = Burger()
         burger.set_buns(bun)
         burger.add_ingredient(ingredient)
         expected_receipt = f'= {ingredient.get_type().lower()} {ingredient.get_name()} =\n'\
